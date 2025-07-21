@@ -1,0 +1,28 @@
+{
+  "name": "api",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^24.0.15",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "scripts": {
+    "start": "bun run index.ts",
+    "dev": "bun --watch run index.ts"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.17.0",
+    "bcrypt": "^6.0.0",
+    "hono": "^4.8.5",
+    "jsonwebtoken": "^9.0.2",
+    "knex": "^3.1.0",
+    "pg": "^8.16.3",
+    "reflect-metadata": "^0.2.2",
+    "tsyringe": "^4.10.0"
+  }
+}
