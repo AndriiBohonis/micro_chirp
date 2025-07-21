@@ -5,11 +5,14 @@ To install dependencies:
 ```bash
 bun install
 ```
+Navigate to the API folder
 
-To run:
+cd packages/api
 
+Create and fill the .env file
+
+To start the project, run:
 ```bash
-bun run index.ts
+npm run dev
 ```
 
-This project was created using `bun init` in bun v1.2.18. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
