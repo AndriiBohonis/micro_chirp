@@ -11,9 +11,9 @@ Navigate to the API folder
 cd packages/api
 ```
 
-Create and fill the .env file
+Create and fill the .env file based on .env.example
 
-To start the project, run:
+To start the project, run from the project root.
 ```bash
 npm run dev
 ```
