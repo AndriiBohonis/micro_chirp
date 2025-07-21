@@ -18,23 +18,24 @@ chirp.get('/:id', async (ctx) => {
   return controller.get(ctx);
 });
 
-chirp.post('/', withAuth, zValidator('form', createChirpSchema), async (ctx) => {
-  const data = ctx.req.valid('form');
+chirp.post('/', withAuth, zValidator('json', createChirpSchema), async (ctx) => {
+  const data = ctx.req.valid('json');
   const user_id = ctx.var.jwtPayload.id;
   return controller.create(ctx, { ...data, user_id });
 });
 
 chirp.patch(
   '/:id',
+  withAuth,
   zValidator('param', paramChirpSchema),
-  zValidator('form', createChirpSchema.partial()),
+  zValidator('json', createChirpSchema.partial()),
   async (ctx) => {
-    const data = ctx.req.valid('form');
+    const data = ctx.req.valid('json');
     return controller.update(ctx, data);
   },
 );
 
-chirp.delete('/:id', zValidator('param', paramChirpSchema), async (ctx) => {
+chirp.delete('/:id', withAuth, zValidator('param', paramChirpSchema), async (ctx) => {
   return controller.delete(ctx);
 });
 
