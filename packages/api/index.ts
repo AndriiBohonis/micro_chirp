@@ -12,7 +12,14 @@ config();
 const app = new Hono();
 
 app.use('*', logger());
-app.use('*', cors());
+app.use(
+  '*',
+  cors({
+    origin: '*',
+    allowMethods: ['POST', 'GET', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowHeaders: ['Content-Type', 'Authorization'],
+  }),
+);
 
 app.get('/', (c) => {
   return c.text(`Server is running`);
