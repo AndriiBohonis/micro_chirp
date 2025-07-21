@@ -21,7 +21,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
 
   const { data } = useQuery({
     queryKey: ['me'],
-    queryFn: () => AuthService.me(token),
+    queryFn: () => AuthService.me(),
     enabled: Boolean(token),
     staleTime: Infinity,
     refetchOnWindowFocus: false,
