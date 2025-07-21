@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import { UserService } from '@/users/user.service.ts';
 import { AuthService } from '@/auth/auth.service.ts';
 import { injectable } from 'tsyringe';
-import type { LoginDto, RegisterDro } from '@/common/dtos/auth.dto.ts';
+import type { LoginDto, RegisterDto } from '@/common/dtos/auth.dto.ts';
 
 @injectable()
 export class AuthController {
@@ -29,8 +29,7 @@ export class AuthController {
     return ctx.json(session);
   }
 
-  async register(ctx: Context, data: RegisterDro) {
-    console.log(data);
+  async register(ctx: Context, data: RegisterDto) {
     const { username, email, password } = data;
 
     const userExists = await this.userService.findByUsernameOrEmail({ username, email });
@@ -48,5 +47,12 @@ export class AuthController {
 
     const session = this.authService.createSession(newUser);
     return ctx.json(session);
+  }
+
+  async me(ctx: Context) {
+    const jwtPayload = ctx.get('jwtPayload');
+    const user = await this.userService.findById(jwtPayload.id);
+
+    return ctx.json(user);
   }
 }
