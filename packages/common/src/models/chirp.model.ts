@@ -1,5 +1,5 @@
-import { BaseModel } from '@common/models/base.model';
-import { UserModel } from '@common/models/user.model';
+import { BaseModel } from '@/common/models/base.model';
+import { UserModel } from '@/common/models/user.model';
 
 export type ChirpModel = BaseModel & {
   user_id: number;

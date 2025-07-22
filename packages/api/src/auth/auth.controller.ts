@@ -4,6 +4,7 @@ import { UserService } from '@/users/user.service.ts';
 import { AuthService } from '@/auth/auth.service.ts';
 import { injectable } from 'tsyringe';
 import type { LoginDto, RegisterDto } from '@/common/dtos/auth.dto.ts';
+import type { UserModel } from '@/common/models/user.model.ts';
 
 @injectable()
 export class AuthController {
@@ -21,7 +22,7 @@ export class AuthController {
     if (!user) {
       return ctx.json({ error: 'User not found' }, 400);
     }
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(password, user?.password || '');
     if (!isPasswordValid) {
       return ctx.json({ error: 'Invalid password' }, 400);
     }

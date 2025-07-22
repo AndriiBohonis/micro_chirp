@@ -5,7 +5,6 @@ import { Input } from '@/components/ui/input';
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { RegisterDto } from '@/common/dtos/auth.dto';
 import { toast } from 'sonner';
 import {
   Form,
@@ -16,16 +15,16 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { InfiniteData, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useSession } from '@/app/session-context';
 
 import { createChirpSchema } from '@/common/schemas/chirp.schema';
-import { chirpCreateDto } from '@/common/dtos/chirp.dto';
+import { ChirpCreateDto } from '@/common/dtos/chirp.dto';
 import { ChirpService } from '@/services/chirps.service';
 import { Textarea } from '@/components/ui/textarea';
 import { ChirpModel } from '@/common/models/chirp.model';
 import { PaginatedResponse } from '@/common/models/base.model';
+
 export function ChirpForm() {
-  const form = useForm<chirpCreateDto>({
+  const form = useForm<ChirpCreateDto>({
     mode: 'onSubmit',
     resolver: zodResolver(createChirpSchema),
     defaultValues: {
@@ -63,7 +62,7 @@ export function ChirpForm() {
                   }
                 : page,
             ),
-          };
+          } as InfiniteData<PaginatedResponse<ChirpModel>, unknown>;
         },
       );
 
@@ -86,7 +85,7 @@ export function ChirpForm() {
     },
   });
 
-  const onSubmit = (data: RegisterDto) => {
+  const onSubmit = (data: ChirpCreateDto) => {
     mutation.mutate(data);
   };
 

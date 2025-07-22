@@ -5,7 +5,7 @@
     "moduleResolution": "bundler",
     "baseUrl": ".",
     "paths": {
-      "@common/*": ["packages/common/src/*"]
+      "@/common/*": ["packages/common/src/*"]
     },
     "strict": true,
     "esModuleInterop": true,

@@ -12,9 +12,17 @@ cd packages/api
 ```
 
 Create and fill the .env file based on .env.example
-
-To start the project, run from the project root.
+To start the api
 ```bash
-npm run dev
+bun run start
 ```
+
+Run Web
+
+```bash
+cd packages/web
+npm run build
+npm run start
+```
+
 

@@ -5,6 +5,7 @@ import { db } from '@/config/db.ts';
 import type { PaginatedResponse, PaginationOptions } from '@/common/models/base.model.ts';
 import type { ChirpModel } from '@/common/models/chirp.model.ts';
 import { findAll } from '@/utils/find-all-builder.ts';
+import type { ChirpCreateDto } from '@/common/dtos/chirp.dto.ts';
 
 @injectable()
 export class ChirpService {
@@ -15,7 +16,7 @@ export class ChirpService {
     this.db = db;
   }
 
-  async create(chirp: Omit<ChirpModel, 'id' | 'created_at' | 'updated_at'>): Promise<ChirpModel> {
+  async create(chirp: ChirpCreateDto): Promise<ChirpModel> {
     const [created] = await this.db(this.table).insert(chirp).returning('*');
     return created;
   }

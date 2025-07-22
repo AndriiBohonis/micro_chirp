@@ -2,12 +2,13 @@ import { injectable } from 'tsyringe';
 import type { Context } from 'hono';
 import { ChirpService } from '@/chirps/chirps.service.ts';
 import type { ChirpModel } from '@/common/models/chirp.model.ts';
+import type { ChirpCreateDto } from '@/common/dtos/chirp.dto.ts';
 
 @injectable()
 export class ChirpController {
   constructor(private chirpService: ChirpService) {}
 
-  async create(ctx: Context, data: Omit<ChirpModel, 'id' | 'created_at' | 'updated_at'>) {
+  async create(ctx: Context, data: ChirpCreateDto & { user_id: number }) {
     const chirp = await this.chirpService.create(data);
 
     return ctx.json(chirp);
